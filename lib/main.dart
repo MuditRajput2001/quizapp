@@ -20,6 +20,13 @@ class MyApp extends StatefulWidget {
 class MyAppState extends State<MyApp> {
   int questionIndex = 0;
   var totalscore = 0;
+  void reset() {
+    setState(() {
+      questionIndex = 0;
+      totalscore = 0;
+    });
+  }
+
   void questionAnswer(int score) {
     totalscore = totalscore + score;
     setState(() {
@@ -35,17 +42,17 @@ class MyAppState extends State<MyApp> {
       {
         'QuestionNumber': 'What is your name tell me',
         'Answers': [
-          {'Text': 'Mudit', 'score': 100},
+          {'Text': 'Mudit', 'score': 0},
           {'Text': 'ABC', 'score': 10},
         ],
       },
-      // {
-      //   'QuestionNumber': "What is your birthplace",
-      //   'Answers': [
-      //     {'Text': 'xyz', 'score': 5},
-      //     {'Text': 'not to say', 'score': 0},
-      //   ]
-      // },
+      {
+        'QuestionNumber': "What is your birthplace",
+        'Answers': [
+          {'Text': 'xyz', 'score': 5},
+          {'Text': 'not to say', 'score': 0},
+        ]
+      },
     ];
 
     return MaterialApp(
@@ -55,7 +62,7 @@ class MyAppState extends State<MyApp> {
         ),
         body: questionIndex < question.length
             ? quiz(questionAnswer, question, questionIndex)
-            : result(totalscore),
+            : result(totalscore, reset),
       ),
     );
   }

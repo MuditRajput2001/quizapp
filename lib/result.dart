@@ -1,12 +1,14 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 
 class result extends StatelessWidget {
   final int resultScore;
-  result(this.resultScore);
+  final VoidCallback resethandler;
+  result(this.resultScore, this.resethandler);
 
   String get resultPhase {
     var resulttext = "You did it";
@@ -25,7 +27,15 @@ class result extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: Text(resultPhase),
+      child: Column(
+        children: [
+          Text(resultPhase),
+          FlatButton(
+            onPressed: resethandler,
+            child: Text("Reset your Quiz!!"),
+          )
+        ],
+      ),
     );
   }
 }
